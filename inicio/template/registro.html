@@ -1,0 +1,24 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{%static 'css/cosa.css'%}">
+<p>hola! aca podes registrarte</p>
+<div class="RegistroForm"  >
+    <form class="Registros" action="/AppDesafio/registro/" method="POST"  > {% csrf_token %}
+        <input type="text" name="username" placeholder="nickname">
+        <br>
+        <input type="email" name="email" placeholder="email">
+        <br>
+        <input type="text" name="first_name" placeholder="Nombre">
+        <br>
+        <input type="text" name="last_name" placeholder="Apellido">
+        <br>
+        <input type="text" name="password" placeholder="contraseña">
+        <br>
+        <button type="submit" class="btn btn-primary btndj">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}
