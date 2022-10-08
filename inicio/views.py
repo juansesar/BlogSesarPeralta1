@@ -52,17 +52,27 @@ def actualizar(request):
 #def login(request):
 #    return render (request, "login.html")
 
-def login(request):
-    #if request.GET["email"] and request.GET["password"]:
-    #    email = request.GET["email"]
-    #    usuarios = user.objects.filter(email__icontains = email) 
-    #    pwd = request.GET["password"]
-    #    password = user.objects.filter(pasword__icontains = password)
-    #    if email == usuarios and pwd == password:
-    #        return render(request, "inicio.html")
-    #else:
-    #    respuesta = "No enviaste datos"
-    return render (request, "login.html")
+def login_request(request):
+    if request.method == 'POST':
+        form= AuthenticationForm(request, data= request.POST)
+        if form.is_valid():
+            usuario= form.cleaned_data.get('username')
+            pwd= form.cleaned_data.get('password')
+            user=authenticate(username= usuario , password=pwd)
+            if user is not None:
+                login(request, user)
+                return render(request, 'home.html', {'mensaje':f'bienvenido{usuario}'})
+            else:
+                return render(request, 'login.html', {'mensaje':f'Error, datos incorrectos'})
+        else:
+            return render(request, 'login.html', {'mensaje':f'Error, datos incorrectos'})
+    formulario = AuthenticationForm()
+    return render(request, 'login.html', {'formulario': formulario})
+
+            
+    
+    
+    
 
 
 

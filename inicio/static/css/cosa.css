@@ -1,3 +1,4 @@
-.contenido[
-    
-]
+.datosnuestros{
+    display = flex ; 
+    justity-content = space-between 
+}

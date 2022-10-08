@@ -5,14 +5,11 @@
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
-<p>Login</p>
-<div class="RegistroForm"  >
-    <form class="Registros" action="/AppDesafio/login/" method="GET"  >
-        <input type="email" name="email" placeholder="email">
-        <br>
-        <input type="text" name="password" placeholder="contraseña">
-        <br>
-        <button type="submit" class="btn btn-primary btndj">Ingresar</button>
-    </form>
-</div>
+<h1> Login</h1>
+<form method="POST"> {% csrf_token %}
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="login">
+</form>
 {% endblock %}

@@ -11,9 +11,9 @@ urlpatterns = [
     path('perfil/',perfil),
     path('actualizar datos/', actualizar),
     path('foto/', fotoPerfil),
-    path('login/', login),
+    #path('login/', login),
     path('', home),
-    #path('login/', login_request),
+    path('login/', login_request),
     #path('perfil/editarPerfil/', actualizar),
     
   
