@@ -14,7 +14,7 @@ urlpatterns = [
     #path('login/', login),
     path('', home),
     path('login/', login_request),
-    #path('perfil/editarPerfil/', actualizar),
+    path('UserPwd/', userForm),
     
   
 ]

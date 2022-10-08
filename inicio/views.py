@@ -18,9 +18,9 @@ def home(request):
 
 def registro(request):
     if request.method == "POST":
-        usuario= user(username = request.POST['username'], email = request.POST['email'], first_name = request.POST['first_name'], last_name = request.POST['last_name'],password= request.POST['password'] )
+        usuario= user(username = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'] )
         usuario.save()
-        return render(request, "home.html")
+        return render(request, "userForm.html")
     return render(request, "registro.html")
 
 #def perfil(request):
@@ -48,6 +48,16 @@ def actualizar(request):
         formulario = UserEditForm()
     return render (request, "actualizar.html", {'formulario': formulario})
     
+def userForm(request):  
+    formulario = UserRegisterForm(request.POST)
+    if request.method == 'POST':
+        if formulario.is_valid():
+                formulario.save()
+                return render (request, "home.html")
+        else:
+            return render(request, "userForm.html", {'formulario': formulario})  
+    formulario = UserRegisterForm()
+    return render(request, "userForm.html", {'formulario': formulario})  
 
 #def login(request):
 #    return render (request, "login.html")

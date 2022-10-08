@@ -5,11 +5,11 @@
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
-<h1> Login</h1>
+<h1> registra tu usuario y contraseña</h1>
 <form method="POST"> {% csrf_token %}
     <table>
         {{ formulario.as_table }}
     </table>
-    <nput type="submit" value="login">
+    <input type="submit" value="guardar">
 </form>
 {% endblock %}

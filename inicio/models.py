@@ -10,10 +10,9 @@ class Datos_personales(models.Model):
 
 class user(models.Model):
     username = models.CharField(max_length= 40)
-    email = models.EmailField(max_length= 40)
     first_name = models.CharField(max_length= 40)
     last_name = models.CharField(max_length= 40)
-    password = models.CharField(max_length= 40)
+    
 
 #class Avatar(models.Model):
 #    #vinculo con el usuario
