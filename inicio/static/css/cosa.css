@@ -1,4 +1,7 @@
-.datosnuestros{
-    display = flex ; 
-    justity-content = space-between 
+.experiencia {
+    background: var(--darkened-bg);
+    height: auto;
+    justify-content: center;
+    width: 100%;
 }
+
