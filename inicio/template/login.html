@@ -6,10 +6,11 @@
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
 <h1> Login</h1>
-<form method="POST"> {% csrf_token %}
-    <table>
-        {{ formulario.as_table }}
-    </table>
-    <nput type="submit" value="login">
-</form>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        <button type="submit" >Iniciar Sesion</button>
+    </form>
+
 {% endblock %}

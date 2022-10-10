@@ -14,8 +14,5 @@ class user(models.Model):
     last_name = models.CharField(max_length= 40)
     
 
-#class Avatar(models.Model):
-#    #vinculo con el usuario
-#    user = models.ForeignKey(User, on_delete=models.CASCADE)
-#    #subcarpeta Avatares de media
-#    image = models.ImageField(upload_to='avatares', null = True, blank = True)
+#class imagenes(models.Model):
+#    image = models.ImageField(upload_to='imagenes', null = True, blank = True)
