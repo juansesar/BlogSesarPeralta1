@@ -35,6 +35,7 @@ def fotoPerfil(request):
     return render (request, "fotoPerfil.html")
 
 def experiencia(request):
+    
     return render (request, "experiencia.html")
 
 def actualizar(request):

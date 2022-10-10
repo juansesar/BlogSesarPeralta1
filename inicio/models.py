@@ -14,5 +14,5 @@ class user(models.Model):
     last_name = models.CharField(max_length= 40)
     
 
-#class imagenes(models.Model):
-#    image = models.ImageField(upload_to='imagenes', null = True, blank = True)
+class imagenes(models.Model):
+    image = models.ImageField(upload_to='imagenes', null = True, blank = True)

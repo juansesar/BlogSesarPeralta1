@@ -3,4 +3,4 @@ from inicio.models import *
 
 # Register your models here.
 admin.site.register(user),
-#admin.site.register(imagenes),
+admin.site.register(imagenes),
