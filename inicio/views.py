@@ -87,7 +87,29 @@ def login_request(request):
     formulario = AuthenticationForm()
     return render(request, 'login.html', {'formulario': formulario})
 
-            
+@login_required
+def AgregarAvatar(request):
+    if request.method == 'POST':
+        form = AvatarFormulario(request.POST, request.FILES)
+        print(form)
+        print(form.is_valid())
+        if form.is_valid():
+            user = User.objects.get(username = request.user)
+            avatar = Avatar(user = user, image = form.cleaned_data['avatar'], id = request.user.id)
+            avatar.save()
+            avatar = Avatar.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None           
+            return render(request, 'home.html', {'avatar': avatar})
+    else:
+        try:
+            avatar = Avatar.objects.filter(user = request.user.id)
+            form = AvatarFormulario()
+        except:
+            form = AvatarFormulario()
+    return render(request, 'AgregarAvatar.html', {'form': form})           
     
     
     

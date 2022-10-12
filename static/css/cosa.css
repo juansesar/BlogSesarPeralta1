@@ -1,7 +1,7 @@
 .experiencia {
     background: var(--darkened-bg);
     height: auto;
-    justify-content: center;
+    
     flex-direction: row;
     width: 150px;
 }
