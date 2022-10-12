@@ -15,6 +15,8 @@ urlpatterns = [
     path('', home),
     path('login/', login_request),
     path('UserPwd/', userForm),
+    path('CvSesar/', CvSesar),
+    path('CvPeralta/', CvPeralta),
     
   
 ]

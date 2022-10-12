@@ -17,6 +17,12 @@ from django.contrib.auth.models import User
 def home(request):
     return render (request, "home.html")
 
+def CvSesar(request):
+    return render (request, "CvSesar.html")
+
+def CvPeralta(request):
+    return render (request, "CvPeralta.html")
+
 def registro(request):
     if request.method == "POST":
         usuario= user(username = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'] )
@@ -35,7 +41,7 @@ def fotoPerfil(request):
     return render (request, "fotoPerfil.html")
 
 def experiencia(request):
-    
+
     return render (request, "experiencia.html")
 
 def actualizar(request):
