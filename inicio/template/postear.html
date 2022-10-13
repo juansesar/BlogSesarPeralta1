@@ -10,11 +10,10 @@
             {% csrf_token %}
             {{ form.as_p }}
                 
-        </form>
+        </form>{% csrf_token %}
         <h5 class="card-title">{{titulo}}</h5> <input type="text" name="titulo" placeholder="titula tu foto">
         <h5 class="card-title">{{subtitulo}}</h5> <input type="text" name="subtitulo" placeholder="contanos la ubicacion">
         <p class="card-text">{{cuerpo}}</p><input type="text" name="cuerpo" placeholder="contanos algo sobre este momento">
-        
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{usuario}}</li>
             <li class="list-group-item">{{fecha}}</li><input type="text" name="fecha" placeholder="fecha aproximda">

@@ -10,7 +10,7 @@ urlpatterns = [
     path('developers/', experiencia),
     path('perfil/',perfil),
     path('actualizar datos/', actualizar),
-    path('foto/', fotoPerfil),
+    path('avatar/', AgregarAvatar),
     #path('login/', login),
     path('home/', home),
     path('login/', login_request),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('CvSesar/', CvSesar),
     path('CvPeralta/', CvPeralta),
     path('', homelg),
-    path('postear/', posteo),
+    path('newpost/', newpost),
     path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
     path('home/<name>', home),
 ]

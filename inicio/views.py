@@ -37,8 +37,8 @@ def CvPeralta(request):
 #    return render (request, "perfil.html")
 
 def perfil(request=None):
-    username = User.objects.filter(username__icontains = username) 
-    return render(request, "perfil.html", {"usuarios": username})
+    usuarios = User.objects.filter(username__icontains = usuarios) 
+    return render(request, "perfil.html", {"usuarios": usuarios})
 
 def perfilView(request):
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -90,17 +90,17 @@ def login_request(request):
             pwd = formulario.cleaned_data.get('password')
 
             user = authenticate(username = user, password = pwd)
-            #return render(request, 'home.html')
-            if user is not None:
-                login(request, user)
-                avatar = Avatar.objects.filter(user = request.user.id)
-                try:
-                    avatar = avatar[0].image.url
-                except:
-                    avatar = None
-                return render(request, 'home.html', {'avatar': avatar})
-            else:
-                return render(request, "login.html", {'formulario':formulario})
+            return render(request, 'home.html')
+            #if user is not None:
+            #    login(request, user)
+            #    avatar = Avatar.objects.filter(user = request.user.id)
+            #    try:
+            #        avatar = avatar[0].image.url
+            #    except:
+            #        avatar = None
+            #    return render(request, 'home.html', {'avatar': avatar})
+            #else:
+            #    return render(request, "login.html", {'formulario':formulario})
         else:
             return render(request, "login.html", {'formulario':formulario})
     formulario = AuthenticationForm()
@@ -130,7 +130,7 @@ def AgregarAvatar(request):
             form = AvatarFormulario()
     return render(request, 'AgregarAvatar.html', {'form': form})           
     
-def posteo(request): 
+def newpost(request): 
     #datosdefault= Posteo(titulo= "titulo", subtitulo= "subtitulo", cuerpo= "comenta algo sobre esta foto", fecha= "fecha de la foto")
     datoscargados= Posteo(request.POST)
     if request.method == 'POST':
@@ -162,7 +162,7 @@ def posteo(request):
         except:
             form = ImagenFormulario()
     
-    return render (request, "postear.html", {'form': form,'titulo': "tutulo ",'subtitulo': "subtitulo", 'cuerpo':"comenta algo sobre esta foto",'fecha':"fecha de la foto"}) 
+    return render (request, "newpost.html", {'form': form,'titulo': "tutulo ",'subtitulo': "subtitulo", 'cuerpo':"comenta algo sobre esta foto",'fecha':"fecha de la foto"}) 
 
 def verpost(request=None):
     post = Posteo.objects.filter(username__icontains = post) 
