@@ -20,4 +20,5 @@ urlpatterns = [
     path('', homelg),
     path('postear/', posteo),
     path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
+    path('home/<name>', home),
 ]

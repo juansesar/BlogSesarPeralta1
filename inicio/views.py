@@ -37,8 +37,16 @@ def CvPeralta(request):
 #    return render (request, "perfil.html")
 
 def perfil(request=None):
-    usuario = User.objects.filter(username__icontains = usuario) 
-    return render(request, "perfil.html", {"usuarios": usuario})
+    username = User.objects.filter(username__icontains = username) 
+    return render(request, "perfil.html", {"usuarios": username})
+
+def perfilView(request):
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, 'perfil.html', {'avatar': avatar})
 
 def fotoPerfil(request):
     return render (request, "fotoPerfil.html")
@@ -82,17 +90,17 @@ def login_request(request):
             pwd = formulario.cleaned_data.get('password')
 
             user = authenticate(username = user, password = pwd)
-            return render(request, 'home.html')
-            #if user is not None:
-            #    login(request, user)
-            #    avatar = Avatar.objects.filter(user = request.user.id)
-            #    try:
-            #        avatar = avatar[0].image.url
-            #    except:
-            #        avatar = None
-            #    return render(request, 'home.html', {'avatar': avatar})
-            #else:
-            #    return render(request, "login.html", {'formulario':formulario})
+            #return render(request, 'home.html')
+            if user is not None:
+                login(request, user)
+                avatar = Avatar.objects.filter(user = request.user.id)
+                try:
+                    avatar = avatar[0].image.url
+                except:
+                    avatar = None
+                return render(request, 'home.html', {'avatar': avatar})
+            else:
+                return render(request, "login.html", {'formulario':formulario})
         else:
             return render(request, "login.html", {'formulario':formulario})
     formulario = AuthenticationForm()
