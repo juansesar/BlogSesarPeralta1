@@ -1,8 +1,39 @@
+
+.background {
+    width: 100%;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+}
 .experiencia {
     background: var(--darkened-bg);
     height: auto;
-    
-    flex-direction: row;
-    width: 150px;
+    margin: auto;
+    text-align: center;
 }
+ 
+.caption { 
+    position: absolute; 
+    top: 58%; 
+    left: 10%; 
+    width: 40%;
+    color: white;
+    text-align: right; }
 
+.imagen { 
+    width: 50%;
+    margin: auto;
+}
+.CvSesar {
+    width: 600px;
+    margin: auto;
+}
+.formulario {
+    margin-left: 60px;
+    padding: 30px;
+}
+.titulos {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}

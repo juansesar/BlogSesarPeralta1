@@ -5,12 +5,17 @@
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
-<h1> Login</h1>
-
+<div class="container"></div>
+<div class="titulos">
+<h1>Login</h1>
+</div>
+    <div class="formulario">
     <form method="POST">
         {% csrf_token %}
         {{ formulario.as_p }}
         <button type="submit" >Iniciar Sesion</button>
     </form>
+</div>
+</div>
 
 {% endblock %}
