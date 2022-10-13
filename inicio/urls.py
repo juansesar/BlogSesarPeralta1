@@ -12,11 +12,11 @@ urlpatterns = [
     path('actualizar datos/', actualizar),
     path('foto/', fotoPerfil),
     #path('login/', login),
-    path('', home),
+    path('home/', home),
     path('login/', login_request),
-    path('UserPwd/', userForm),
+    #path('UserPwd/', userForm),
     path('CvSesar/', CvSesar),
     path('CvPeralta/', CvPeralta),
-    
+    path('', homelg),
   
 ]

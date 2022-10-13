@@ -6,9 +6,10 @@
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
 <h1> registra tu usuario y contraseña</h1>
-<form method="POST"> {% csrf_token %}
+<form method="POST"> 
     <table>
-        {{ formulario.as_table }}
+        {% csrf_token %}
+        {{ form.as_table }}
     </table>
     <input type="submit" value="guardar">
 </form>

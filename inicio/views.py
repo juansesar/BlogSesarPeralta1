@@ -17,24 +17,27 @@ from django.contrib.auth.models import User
 def home(request):
     return render (request, "home.html")
 
+def homelg(request):
+    return render (request, "homelg.html")
+
 def CvSesar(request):
     return render (request, "CvSesar.html")
 
 def CvPeralta(request):
     return render (request, "CvPeralta.html")
 
-def registro(request):
-    if request.method == "POST":
-        usuario= user(username = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'] )
-        usuario.save()
-        return render(request, "userForm.html")
-    return render(request, "registro.html")
+#def registro(request):
+#    if request.method == "POST":
+#        usuario= user(usern = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'] )
+#        usuario.save()
+#        return render(request, "userForm.html")
+#    return render(request, "registro.html")
 
 #def perfil(request):
 #    return render (request, "perfil.html")
 
 def perfil(request=None):
-    usuario = user.objects.filter(username__icontains = usuario) 
+    usuario = User.objects.filter(username__icontains = usuario) 
     return render(request, "perfil.html", {"usuarios": usuario})
 
 def fotoPerfil(request):
@@ -49,41 +52,49 @@ def actualizar(request):
         formulario = UserEditForm(request.POST)
         if formulario.is_valid():
             informacion= formulario.cleaned_data
-            usuario= user(username = informacion['username'], email = informacion['email'], first_name = informacion['first_name'], last_name = informacion['last_name'],password= informacion['password'] )
+            usuario= User(username = informacion['username'], email = informacion['email'], first_name = informacion['first_name'], last_name = informacion['last_name'],password= informacion['password'] )
             usuario.save()
             return render (request, "perfil.html")
     else:
         formulario = UserEditForm()
+    formulario = UserEditForm()
     return render (request, "actualizar.html", {'formulario': formulario})
     
-def userForm(request):  
-    formulario = UserRegisterForm(request.POST)
+def registro(request):  
+    form = UserRegisterForm(request.POST)
     if request.method == 'POST':
-        if formulario.is_valid():
-                formulario.save()
-                return render (request, "home.html")
+        if form.is_valid():
+                form.save()
+                return render (request, "homelg.html")
         else:
-            return render(request, "userForm.html", {'formulario': formulario})  
-    formulario = UserRegisterForm()
-    return render(request, "userForm.html", {'formulario': formulario})  
+            return render(request, "registro.html", {'form': form})  
+    form = UserRegisterForm()
+    return render(request, "registro.html", {'form': form})  
 
 #def login(request):
 #    return render (request, "login.html")
 
 def login_request(request):
     if request.method == 'POST':
-        form= AuthenticationForm(request, data= request.POST)
-        if form.is_valid():
-            usuario= form.cleaned_data.get('username')
-            pwd= form.cleaned_data.get('password')
-            user=authenticate(username= usuario , password=pwd)
+        formulario = AuthenticationForm(request, data = request.POST)
+        if formulario.is_valid():
+            user = formulario.cleaned_data.get('username')
+            pwd = formulario.cleaned_data.get('password')
+
+            user = authenticate(username = user, password = pwd)
+
             if user is not None:
                 login(request, user)
-                return render(request, 'home.html', {'mensaje':f'bienvenido{usuario}'})
+                avatar = Avatar.objects.filter(user = request.user.id)
+                try:
+                    avatar = avatar[0].image.url
+                except:
+                    avatar = None
+                return render(request, 'home.html', {'avatar': avatar})
             else:
-                return render(request, 'login.html', {'mensaje':f'Error, datos incorrectos'})
+                return render(request, "login.html", {'formulario':formulario})
         else:
-            return render(request, 'login.html', {'mensaje':f'Error, datos incorrectos'})
+            return render(request, "login.html", {'formulario':formulario})
     formulario = AuthenticationForm()
     return render(request, 'login.html', {'formulario': formulario})
 

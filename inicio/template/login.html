@@ -1,21 +1,25 @@
-{% extends "home.html" %}
+{% extends "homelg.html" %}
 
 {% load static %}
 
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
-<div class="container"></div>
-<div class="titulos">
-<h1>Login</h1>
+<div class="background">
+    <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
+    <div class="caption" style="top: 15%;">
+        <div class="container">
+            <div class="titulos">
+                <h1>Login</h1>
+            </div>
+            <div class="formularioLG">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ formulario.as_p }}
+                    <button type="submit" >Iniciar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-    <div class="formulario">
-    <form method="POST">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <button type="submit" >Iniciar Sesion</button>
-    </form>
-</div>
-</div>
-
 {% endblock %}

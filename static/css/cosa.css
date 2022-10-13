@@ -27,9 +27,10 @@
     width: 600px;
     margin: auto;
 }
-.formulario {
-    margin-left: 60px;
+.formularioLG {
+    margin-left: 450px;
     padding: 30px;
+    font-family: 'Roboto', sans-serif;
 }
 .titulos {
     margin-top: 20px;
@@ -37,3 +38,4 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
+
