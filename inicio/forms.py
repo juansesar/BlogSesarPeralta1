@@ -40,3 +40,6 @@ class ChangePasswordForm(PasswordChangeForm):
 
 class AvatarFormulario(forms.Form):
     avatar = forms.ImageField()
+
+class ImagenFormulario(forms.Form):
+    imagen = forms.ImageField()

@@ -18,5 +18,6 @@ urlpatterns = [
     path('CvSesar/', CvSesar),
     path('CvPeralta/', CvPeralta),
     path('', homelg),
-  
+    path('postear/', posteo),
+    path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
 ]

@@ -29,12 +29,6 @@
               <a class="nav-link" href="/inicio/home">Home </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/inicio/login">login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/inicio/registro">Registrate</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/inicio/developers">Developers</a>
             </li>
             <li class="nav-item">
@@ -43,6 +37,15 @@
             <li class="nav-item" style="position: absolute; right: 250px">
               <img src="{{ avatar }}" width="40px">
           </li>
+        </li>
+        <li class="nav-item" style="position: absolute; right: 250px">
+            <img src="{{ avatar }}" width="40px">
+        </li>
+        <li class="nav-item" style="position: absolute; right: 100px">
+            <a class="nav-link active" aria-current="page" href="/inicio/perfil/">{{ user.username }}</a>
+        </li>
+        <li class="nav-item" style="position: absolute; right: 0px">
+            <a class="nav-link active" aria-current="page" href="/inicio/logout/">Salir</a>
           </ul>
         </div>
       </div>
@@ -50,7 +53,27 @@
     
     <div class="contenido"   >
     {% block contenido%}
-    
+    <div class="background">
+      <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
+      <div class="caption"style="top: 15%;">
+        <div class="conteiner" >
+          <div class="bienvenida" ></div> 
+            <h1>Bienvendo al Blog</h1>
+            <h3>un proyecto de Sesar-Peralta</h3>
+            <h5>aqui podras subir tus imagenes con un breve comentario y comunicarte con el resto de los usuarios</h5>
+          </div>
+          <div>
+          <a href="/inicio/postear" class="btn btn-dark">Postea tu foto</a>
+          </div>
+          <div class="posteos">
+            {% for post in posteos %}
+            <li>
+            {{ post }}
+            </li>
+            <br>
+            {% endfor %}
+          </div>
+        </div>
     {%endblock%}  
     </div>
 </body>
