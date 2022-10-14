@@ -132,37 +132,37 @@ def AgregarAvatar(request):
     
 def newpost(request): 
     #datosdefault= Posteo(titulo= "titulo", subtitulo= "subtitulo", cuerpo= "comenta algo sobre esta foto", fecha= "fecha de la foto")
-    datoscargados= Posteo(request.POST)
+    #datoscargados= Posteo(request.POST)
     if request.method == 'POST':
         formulario = Posteo(request.POST)
         if formulario.is_valid():
             informacion= formulario.cleaned_data
-            post= Posteo(titulo= informacion['titulo'], subtitulo= informacion['subtitulo'], cuerpo= informacion['cuerpo'], fecha= informacion['fecha'])
+            post= Posteo(image = informacion['imagen'], titulo= informacion['titulo'], subtitulo= informacion['subtitulo'], cuerpo= informacion['cuerpo'], fecha= informacion['fecha'])
             post.save()
             return render (request, "home.html")
         else:
             "faltan datos"
-    if request.method == 'POST':
-        form = ImagenFormulario(request.POST, request.FILES)
-        print(form)
-        print(form.is_valid())
-        if form.is_valid():
-            imagen = imagenes( imagen = form.cleaned_data['imagen'], id = request.user.id)
-            imagen.save()
-            imagen = imagenes.objects.filter(user = request.user.id)
-            try:
-                imagen = imagen[0].image.url
-            except:
-                aimagen = None           
-            return render(request, 'home.html', {'imagen': imagen})
-    else:
-        try:
-            imagen = imagenes.objects.filter(user = request.user.id)
-            form = ImagenFormulario()
-        except:
-            form = ImagenFormulario()
-    
-    return render (request, "newpost.html", {'form': form,'titulo': "tutulo ",'subtitulo': "subtitulo", 'cuerpo':"comenta algo sobre esta foto",'fecha':"fecha de la foto"}) 
+    #if request.method == 'POST':
+    #    form = ImagenFormulario(request.POST, request.FILES)
+    #    print(form)
+    #    print(form.is_valid())
+    #    if form.is_valid():
+    #        imagen = imagenes( imagen = form.cleaned_data['imagen'], id = request.user.id)
+    #        imagen.save()
+    #        imagen = imagenes.objects.filter(user = request.user.id)
+    #        try:
+    #            imagen = imagen[0].image.url
+    #        except:
+    #            aimagen = None           
+    #        return render(request, 'home.html', {'imagen': imagen})
+    #else:
+    #    try:
+    #        imagen = imagenes.objects.filter(user = request.user.id)
+    #        form = ImagenFormulario()
+    #    except:
+    #        form = ImagenFormulario()
+      
+    return render (request, "newpost.html") 
 
 def verpost(request=None):
     post = Posteo.objects.filter(username__icontains = post) 

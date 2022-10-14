@@ -6,12 +6,12 @@
 <h1>Carga los datos de tu nuevo post</h1>
 <form action="" method="POST" enctype="multipart/form-data"> 
     {% csrf_token %}
-    {{ form.as_p }}       
+    <input type="file" name="imagen" />  
+    <input type="text" name="titulo" placeholder="titula tu foto">
+    <input type="text" name="subtitulo" placeholder="contanos la ubicacion">
+    <input type="text" name="cuerpo" placeholder="contanos algo sobre este momento">
+    <input type="text" name="fecha" placeholder="fecha aproximda">
+    <button type="submit" class="btn btn-primary btndj">postear</button>
+
 </form>
-{% csrf_token %}
-<input type="text" name="titulo" placeholder="titula tu foto">
-<input type="text" name="subtitulo" placeholder="contanos la ubicacion">
-<input type="text" name="cuerpo" placeholder="contanos algo sobre este momento">
-<input type="text" name="fecha" placeholder="fecha aproximda">
-<input type="submit" value="Aceptar">
 {% endblock %}

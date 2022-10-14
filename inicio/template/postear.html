@@ -9,8 +9,6 @@
         <form action="" method="POST" enctype="multipart/form-data"> 
             {% csrf_token %}
             {{ form.as_p }}
-                
-        </form>{% csrf_token %}
         <h5 class="card-title">{{titulo}}</h5> <input type="text" name="titulo" placeholder="titula tu foto">
         <h5 class="card-title">{{subtitulo}}</h5> <input type="text" name="subtitulo" placeholder="contanos la ubicacion">
         <p class="card-text">{{cuerpo}}</p><input type="text" name="cuerpo" placeholder="contanos algo sobre este momento">
@@ -19,6 +17,7 @@
             <li class="list-group-item">{{fecha}}</li><input type="text" name="fecha" placeholder="fecha aproximda">
         </ul>
         <input type="submit" value="Aceptar">
+        </form>
     </div>
     <div class="card-body">
         <a href="#" class="card-link">Card link</a>
