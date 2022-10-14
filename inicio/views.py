@@ -130,14 +130,24 @@ def AgregarAvatar(request):
             form = AvatarFormulario()
     return render(request, 'AgregarAvatar.html', {'form': form})           
     
+#def newpost(request):
+#    if request.method == 'POST':
+#        formulario = Posteo(request.POST, request.FILES)
+#        post= Posteo(image = formulario['imagen'], titulo= formulario['titulo'], subtitulo= formulario['subtitulo'], cuerpo= formulario['cuerpo'], fecha= formulario['fecha'])
+#        post.save()
+#        return render(request, "home.html", {'post':post})
+#    return render(request, "newpost.html")
+
 def newpost(request): 
     #datosdefault= Posteo(titulo= "titulo", subtitulo= "subtitulo", cuerpo= "comenta algo sobre esta foto", fecha= "fecha de la foto")
     #datoscargados= Posteo(request.POST)
     if request.method == 'POST':
-        formulario = Posteo(request.POST)
+        formulario = Posteo(request.POST, request.FILES)
+        print(formulario)
+        print(formulario.is_valid())
         if formulario.is_valid():
             informacion= formulario.cleaned_data
-            post= Posteo(image = informacion['imagen'], titulo= informacion['titulo'], subtitulo= informacion['subtitulo'], cuerpo= informacion['cuerpo'], fecha= informacion['fecha'])
+            post= Posteo(image = formulario.cleaned_data['imagen'], titulo= informacion['titulo'], subtitulo= informacion['subtitulo'], cuerpo= informacion['cuerpo'], fecha= informacion['fecha'])
             post.save()
             return render (request, "home.html")
         else:
@@ -163,7 +173,7 @@ def newpost(request):
     #        form = ImagenFormulario()
       
     return render (request, "newpost.html") 
-
+#
 def verpost(request=None):
     post = Posteo.objects.filter(username__icontains = post) 
     imagen = imagenes.objects.filter(user = request.user.id)
