@@ -25,4 +25,4 @@ class Posteo(models.Model):
     subtitulo = models.CharField(max_length=100)
     cuerpo = models.CharField(max_length=500)
     fecha = models.DateField()
-    image = models.ImageField(upload_to='imagenes', null = True, blank = True)
+    image = models.ImageField(upload_to='imagenes', null = True, blank = True,)

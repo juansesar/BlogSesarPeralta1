@@ -61,16 +61,27 @@
           <div>
           <a href="/inicio/newpost" class="btn btn-dark">Postea tu foto</a>
           </div>
-          <div class="posteos">
-            {% for post in posteos %}
-            <li>
-            {{ post }}
-            </li>
-            <br>
-            {% endfor %}
+          
+            <div class="caption" style="top: 110%; position: absolute; height: auto; margin: auto; text-align: center;color: rgb(248, 244, 244);left: 27%; ">
+              <div class="posteos">
+                
+                  <ul>
+                  {% for p in posteo %}
+                  <li>{{ p.img }}</li>
+                  <li>{{ p.tituloo }}</li>
+                  <li>{{ p.subtitulo }}</li>
+                  <li>{{ p.cuerpo }}</li>
+                  <li>{{ p.fecha }}</li>
+                  {% endfor %}
+                  </ul>
+                
+              </div>
+            </div>
+            
           </div>
         </div>
+      </div>
     {%endblock%}  
-    </div>
+  </div>
 </body>
 </html>

@@ -12,7 +12,7 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from inicio.template import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
+import pprint
 # Create your views here.
 def home(request):
     return render (request, "home.html")
@@ -142,15 +142,11 @@ def newpost(request):
     #datosdefault= Posteo(titulo= "titulo", subtitulo= "subtitulo", cuerpo= "comenta algo sobre esta foto", fecha= "fecha de la foto")
     #datoscargados= Posteo(request.POST)
     if request.method == 'POST':
-        formulario = Posteo(request.POST, request.FILES)
-        print(formulario)
-        print(formulario.is_valid())
-        if formulario.is_valid():
-            informacion= formulario.cleaned_data
-            post= Posteo(image = formulario.cleaned_data['imagen'], titulo= informacion['titulo'], subtitulo= informacion['subtitulo'], cuerpo= informacion['cuerpo'], fecha= informacion['fecha'])
+            post= Posteo(image = request.POST.get("img", False) , titulo= request.POST['titulo'] , subtitulo= request.POST['subtitulo'] , cuerpo= request.POST['cuerpo'] , fecha= request.POST['fecha'])
             post.save()
-            return render (request, "home.html")
-        else:
+            posteo=Posteo.objects.all()
+            return render (request, "home.html", {'posteo': posteo})
+    else:
             "faltan datos"
     #if request.method == 'POST':
     #    form = ImagenFormulario(request.POST, request.FILES)
@@ -175,10 +171,9 @@ def newpost(request):
     return render (request, "newpost.html") 
 #
 def verpost(request=None):
-    post = Posteo.objects.filter(username__icontains = post) 
-    imagen = imagenes.objects.filter(user = request.user.id)
-    return render(request, "perfil.html", {"post": post, 'imagen': imagen})   
-
+    post = Posteo.objects.all()
+    return render(request, "home.html", {"post": post})   
+    #return HttpResponse( {"post": post})
 
 
 

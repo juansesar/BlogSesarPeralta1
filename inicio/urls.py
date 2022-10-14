@@ -11,7 +11,7 @@ urlpatterns = [
     path('perfil/',perfil),
     path('actualizar datos/', actualizar),
     path('avatar/', AgregarAvatar),
-    #path('login/', login),
+    path('verpost/', verpost),
     path('home/', home),
     path('login/', login_request),
     #path('UserPwd/', userForm),
