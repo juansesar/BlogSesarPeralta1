@@ -144,7 +144,7 @@ def newpost(request):
     if request.method == 'POST':
             post= Posteo(image = request.POST.get("img", False) , titulo= request.POST['titulo'] , subtitulo= request.POST['subtitulo'] , cuerpo= request.POST['cuerpo'] , fecha= request.POST['fecha'])
             post.save()
-            posteo=Posteo.objects.all()
+            posteo= Posteo.objects.all()
             return render (request, "home.html", {'posteo': posteo})
     else:
             "faltan datos"

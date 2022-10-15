@@ -10,27 +10,36 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 {% block contenido %}
-<div class="background">
+<div class="background" style="background-repeat:repeat">
     <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
-    <div class="caption" style="top: 30%; position: absolute; height: auto; margin: auto; text-align: center;color: rgb(10, 10, 10);left: 27%; ">
+</div>
+<div class="container" >
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
         <div class="container" >
+            <div class="texto">
+                <h1>Developers</h1>
+                <h3>Estos son los developers que hicieron este blog</h3>
+                <h6>Hace click en el link para ver sus curriculums</h6>
+            </div>
+        </div>
+    <div class="container" > 
             <div class="experiencia">
                 <div class="card-group">
-                    <div class="card" style="width: 16rem"  >
+                    <div class="card" style="width: 18rem; margin-right: 10px;"  >
                         <div class="imagen">
-                            <img src="{%static 'imagenes/foto.jpeg'%}"  alt="..." class="card-img-top" >
+                            <img src="{%static 'imagenes/foto.jpeg'%}" alt="..." class="card-img-top">
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Juan Sesar</h5>
+                        <div class="card-body" style="color:black">
+                            <h5 class="card-title" >Juan Sesar</h5>
                             <p class="card-text">Developer Python jr</p>
                             <a href="/inicio/CvSesar" class="btn btn-primary">Curriculum Vitae</a>
                         </div>
                     </div>
-                    <div class="card" style="width: 18rem">
+                    <div class="card" style="width: 18rem;">
                         <div class="imagen">
                             <img src="{%static 'imagenes/fotop.jpg'%}"  alt="..." class="card-img-top">
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="color:black">
                             <h5 class="card-title">Juan Bautista Peralta</h5>
                             <p class="card-text">Developer Python jr</p>
                             <a href="/inicio/CvPeralta" class="btn btn-primary">Curriculum Vitae</a>
@@ -39,13 +48,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="caption" style="top: 10%; position: absolute; height: auto; margin: auto; text-align: center;left: 27%; ">
-        <div class="container" >    
-            <h1>Developers</h1>
-            <h3>Estos son los developers que hicieron este blog</h3>
-            <h6>Hace click en el link para ver sus curriculums</h6>
-        </div>
-    </div>
-</div>
+    </div>    
 {% endblock %}
