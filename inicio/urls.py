@@ -1,7 +1,7 @@
 from django.urls import path
 from inicio.views import *
 from django.conf.urls.static import static
-from django.contrib.auth.views import LogoutView, views
+from django.contrib.auth.views import LogoutView
 urlpatterns = [
     
    
@@ -11,7 +11,7 @@ urlpatterns = [
     path('perfil/',perfil),
     path('actualizar datos/', actualizar),
     path('avatar/', AgregarAvatar),
-    path('verpost/', views.verpost),
+    path('verpost/', verpost),
    
     path('home/', home),
     path('login/', login_request),
