@@ -25,4 +25,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
     path('home/<name>', home),
     path('verpost', verpost),
+    path('cambiarContraseña', cambiarContraseña),
 ]
