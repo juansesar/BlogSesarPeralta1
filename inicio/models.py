@@ -15,12 +15,17 @@ from django.contrib.auth.models import User
     
 
 class Avatar(models.Model):
-    image = models.ImageField(upload_to='avatar', null = True, blank = True)
+    #vinculo con el usuario
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #subcarpeta Avatares de media
+    image = models.ImageField(upload_to='imagenes', null = True, blank = True)
+
 
 class imagenes(models.Model):
     image = models.ImageField(upload_to='imagenes', null = True, blank = True)
 
 class Posteo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=50)
     subtitulo = models.CharField(max_length=100)
     cuerpo = models.CharField(max_length=500)
