@@ -7,12 +7,14 @@
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
 <div class="background">
     <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
-    <div class="caption" style="top: 15%;">
-        <div class="container">
-            <div class="titulos">
+</div>
+<div class="container" >
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
+        <div class="container" >
+            <div class="texto" style="margin-bottom: 40px;">
                 <h1>Login</h1>
             </div>
-            <div class="formularioLG">
+            <div class="formulario" style="list-style: none;">
                 <form method="POST">
                     {% csrf_token %}
                     {{ formulario.as_p }}
@@ -21,5 +23,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

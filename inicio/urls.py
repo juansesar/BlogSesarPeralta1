@@ -2,6 +2,8 @@ from django.urls import path
 from inicio.views import *
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
+from django import views
+
 urlpatterns = [
     
    
@@ -9,7 +11,7 @@ urlpatterns = [
     path('registro/', registro),
     path('developers/', experiencia),
     path('perfil/',perfil),
-    path('actualizar datos/', actualizar),
+    path('actualizar/', actualizar),
     path('avatar/', AgregarAvatar),
     path('verpost/', verpost),
    
@@ -22,4 +24,5 @@ urlpatterns = [
     path('newpost/', newpost),
     path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
     path('home/<name>', home),
+    path('verpost', verpost),
 ]

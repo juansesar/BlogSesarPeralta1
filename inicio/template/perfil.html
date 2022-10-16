@@ -1,18 +1,41 @@
 {% extends "home.html" %}
 
 {% load static %}
-
+<link rel="stylesheet" href="{%static 'css/cosa.css'%}">
 
 {% block contenido %}
-<div style="position: relative; top: 80px">
-    <H1>Tus datos de perfil</H1>
-    <ul>
-        <li>{{ usuarios.username }}</li>
-        <li>{{ usuarios.email }}</li>
-        <li>{{ usuarios.first_name }}</li>
-        <li>{{ usuarios.last_name }}</li>
-    </ul>
-    <a class="btn btn-success" style="text-decoration: none; color: white" href="/inicio/actualizar">Editar </a>
-    <a class="btn btn-success" style="text-decoration: none; color: white" href="/inicio/agregarAvatar">Cambiar imagen</a>
-</div>    
+<div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 250vh">
+</div>
+</div>
+<div class="container" >
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; text-align: center; align-items: center; right: 12%;">
+        <h1>User information</H1>
+        {% for user in usuario %}
+    <div class="container" style="padding-left: 12%">
+        <div class="card mb-3" style="max-width: 85%; ">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body" style="color:black; text-align: left;">
+                  <h5 class="card-title">Profile</h5>
+                  <p class="card-text">
+                    <ul style="list-style: none;">
+                    <li>{{ user.username }}</li>
+                    <li>{{ user.email }}</li>
+                    <li>{{ user.first_name }}</li>
+                    <li>{{ user.last_name }}</li>
+                </ul>
+                <a class="btn btn-success" style="text-decoration: none; color: white;" href="/inicio/actualizar">Editar </a>
+                <a class="btn btn-success" style="text-decoration: none; color: white" href="/inicio/avatar">Cambiar imagen</a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -36,9 +36,11 @@ def CvPeralta(request):
 #def perfil(request):
 #    return render (request, "perfil.html")
 
-def perfil(request=None):
-    usuarios = User.objects.filter(username__icontains = usuarios) 
-    return render(request, "perfil.html", {"usuarios": usuarios})
+def perfil(request):
+    usuario = request.user
+    usuario =User.objects.filter(username__icontains= usuario.username) 
+    respuesta= {"usuario": usuario}
+    return render(request, "perfil.html", {"usuario": usuario})
 
 def perfilView(request):
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -106,7 +108,7 @@ def login_request(request):
     formulario = AuthenticationForm()
     return render(request, 'login.html', {'formulario': formulario})
 
-@login_required
+#@login_required
 def AgregarAvatar(request):
     if request.method == 'POST':
         form = AvatarFormulario(request.POST, request.FILES)
@@ -128,7 +130,7 @@ def AgregarAvatar(request):
             form = AvatarFormulario()
         except:
             form = AvatarFormulario()
-    return render(request, 'AgregarAvatar.html', {'form': form})           
+    return render(request, 'avatar.html', {'form': form})           
     
 #def newpost(request):
 #    if request.method == 'POST':
@@ -170,8 +172,9 @@ def newpost(request):
       
     return render (request, "newpost.html") 
 #
-def verpost(request=None):
-    post = Posteo.objects.all()
+def verpost(request):
+    post=request.post
+    post = Posteo.objects.all(titulo__icontains= post.titulo)
     return render(request, "home.html", {"post": post})   
     #return HttpResponse( {"post": post})
 

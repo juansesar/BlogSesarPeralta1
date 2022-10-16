@@ -4,12 +4,16 @@
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
-<div class="background">
-    <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
-    <div class="caption" style="top: 15%;">
-        <h1> hola! aca podes registrarte</h1>
-        <div class="RegistroForm"  >
-            <form method="POST"> 
+<div class="fondo">
+    <img src="{%static 'imagenes/Blog (1).jpg'%}" style= "background-attachment: fixed;" alt="">
+    <div class="container" >
+        <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
+            <div class="container" >
+                <div class="texto" style="margin-bottom: 40px;">
+        <h1> ¡Hola! acá podes registrarte</h1>
+    </div>
+        <div class="RegistroForm" style= "width: 600px; text-align: left;" >
+            <form method="POST">
                 <table>
                     {% csrf_token %}
                     {{ form.as_table }}
@@ -18,5 +22,7 @@
             </form>
         </div>
     </div>
+</div>
+</div>
 </div>
 {% endblock %}

@@ -4,8 +4,10 @@
 
 {% block contenido %}
 <div>
-    <div class="card" style="width: 18rem;">
-        <img src= {{imagen}}  alt="..." class="card-img-top" >
+    <div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 250vh">
+    </div>
         <form action="" method="POST" enctype="multipart/form-data"> 
             {% csrf_token %}
             {{ form.as_p }}
@@ -25,5 +27,4 @@
             
         </div>
     </div>
-</div>
 {% endblock %}

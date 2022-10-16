@@ -47,12 +47,14 @@
       </div>
       </nav>
     
-    <div class="contenido"   >
+    <div class="contenido">
     {% block contenido%}
-    <div class="background">
-      <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
-      <div class="caption"style="top: 15%;">
-        <div class="conteiner" >
+    <div class="bg-image" 
+style="background-image: url('/static/imagenes/Blog (1).jpg');
+       height: 100vh">
+</div>
+        <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
+        <div class="container" >
           <div class="bienvenida" ></div> 
             <h1>Bienvendo al Blog</h1>
             <h3>un proyecto de Sesar-Peralta</h3>
@@ -66,7 +68,7 @@
               <div class="posteos">
                 
                   <ul>
-                  {% for p in posteo %}
+                  {% for p in post %}
                   <li>{{ p.img }}</li>
                   <li>{{ p.tituloo }}</li>
                   <li>{{ p.subtitulo }}</li>
@@ -81,7 +83,6 @@
           </div>
         </div>
       </div>
+      </div>
     {%endblock%}  
   </div>
-</body>
-</html>

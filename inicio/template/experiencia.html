@@ -10,11 +10,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 {% block contenido %}
-<div class="background" style="background-repeat:repeat">
-    <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
+<div class="bg-image" 
+style="background-image: url('/static/imagenes/Blog (1).jpg');
+       height: 160vh">
 </div>
 <div class="container" >
-    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
         <div class="container" >
             <div class="texto">
                 <h1>Developers</h1>
@@ -26,20 +27,16 @@
             <div class="experiencia">
                 <div class="card-group">
                     <div class="card" style="width: 18rem; margin-right: 10px;"  >
-                        <div class="imagen">
-                            <img src="{%static 'imagenes/foto.jpeg'%}" alt="..." class="card-img-top">
-                        </div>
-                        <div class="card-body" style="color:black">
+                         <img src="{%static 'imagenes/foto.jpeg'%}"  alt="..." class="card-img-top">
+                     <div class="card-body" style="color:black">
                             <h5 class="card-title" >Juan Sesar</h5>
                             <p class="card-text">Developer Python jr</p>
                             <a href="/inicio/CvSesar" class="btn btn-primary">Curriculum Vitae</a>
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <div class="imagen">
-                            <img src="{%static 'imagenes/fotop.jpg'%}"  alt="..." class="card-img-top">
-                        </div>
-                        <div class="card-body" style="color:black">
+                        <img src="{%static 'imagenes/fotope.jpg'%}"  alt="..." class="card-img-top">
+                     <div class="card-body" style="color:black">
                             <h5 class="card-title">Juan Bautista Peralta</h5>
                             <p class="card-text">Developer Python jr</p>
                             <a href="/inicio/CvPeralta" class="btn btn-primary">Curriculum Vitae</a>

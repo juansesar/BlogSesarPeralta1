@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+
+{% block contenido %}
+<link rel="stylesheet" href="{%static 'css/cosa.css'%}">
+<div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 100vh">
+    </div>
+    <div class="container" >
+        <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
+            <div class="container" >
+                <div class="texto">
+<h1>Agregar Avatar</h1>
+</div>
+</div>
+<div class="container" > 
+<form action="" method="POST" enctype="multipart/form-data"> 
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Aceptar">
+</form>
+</div>
+</div>
+{% endblock %}

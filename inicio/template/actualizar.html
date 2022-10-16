@@ -5,13 +5,24 @@
 
 {% block contenido %}
 <link rel="stylesheet" href="{%static 'css/cosa.css'%}">
+<div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 250vh">
+</div>
+<div class="container" >
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
+        <div class="container" >
 <h1>Editar Perfil</h1>
 <h1>{{ usuario }}</h1>
-
+<div class="container">
 <form method="POST"> {% csrf_token %}
     <table>
         {{ formulario.as_table }}
     </table>
     <input type="submit" value="Editar Perfil">
 </form>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

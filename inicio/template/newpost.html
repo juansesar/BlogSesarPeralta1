@@ -3,8 +3,10 @@
 {% load static %}
 
 {% block contenido %}
-<div class="background">
-    <img src="{%static 'imagenes/blog (1).jpg'%}" alt="" width= "100%">
+<div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 100vh">
+</div>
     <div class="caption" style="top: 15%; position: absolute; height: auto; margin: auto; text-align: left;color: rgb(247, 242, 242);left: 27%; ">
         <h1>Carga los datos de tu nuevo post</h1>
         <form action="" method="POST" enctype="multipart/form-data"> 
