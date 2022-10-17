@@ -163,10 +163,8 @@ def AgregarAvatar(request):
             try:
                 avatar = avatar[0].image.url
             except:
-                avatar = None
-            usuario = request.user
-            usuario =User.objects.filter(username__icontains= usuario.id)            
-            return render(request, 'perfil.html', {'avatar': avatar, 'usuario': usuario})
+                avatar = None           
+            return render(request, 'perfil.html', {'avatar': avatar})
     else:
         try:
             avatar = Avatar.objects.filter(user = request.user.id)
@@ -196,6 +194,7 @@ def newpost(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
+            
             return render (request, "home.html", {'post': post, 'avatar': avatar})
     else:
             "faltan datos"
@@ -204,8 +203,8 @@ def newpost(request):
         avatar = avatar[0].image.url
     except:
         avatar = None
-    user= user
-    return render (request, "newpost.html", {'avatar': avatar, 'username': user}) 
+    form =ImagenFormulario()
+    return render (request, "newpost.html", {'form': form, 'avatar': avatar, 'username': user}) 
 #
 #def verpost(request):
 #    post = Posteo.objects.get(post= request.all)
