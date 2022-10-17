@@ -35,7 +35,7 @@
               <a class="nav-link" href="/inicio/perfil">Usuario</a>
             </li>
             <li class="nav-item" style="position: absolute; right: 250px">
-              <img src="{{ avatar }}" width="40px">
+              <img src="{{ avatar }}" width="100px">
             </li>
             <li class="nav-item" style="position: absolute; right: 100px">
               <a class="nav-link active" aria-current="page" href="/inicio/perfil/">{{ user.username }}</a>
@@ -51,7 +51,7 @@
     {% block contenido%}
     <div class="bg-image" 
 style="background-image: url('/static/imagenes/Blog (1).jpg');
-       height: 100vh">
+       height: 500vh">
 </div>
         <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
         <div class="container" >
@@ -64,22 +64,35 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
           <a href="/inicio/newpost" class="btn btn-dark">Postea tu foto</a>
           </div>
           
-            <div class="caption" style="top: 110%; position: absolute; height: auto; margin: auto; text-align: center;color: rgb(248, 244, 244);left: 27%; ">
-              <div class="posteos">
-                <form action="" method="GET" enctype="multipart/form-data"> 
-                  <ul>
-                  {% for p in post %}
-                  <li>{{ p.img }}</li>
-                  <li>{{ p.tituloo }}</li>
-                  <li>{{ p.subtitulo }}</li>
-                  <li>{{ p.cuerpo }}</li>
-                  <li>{{ p.fecha }}</li>
+          <div class="caption" style="top: 110%; position: absolute; height: auto; margin: auto; text-align: center;color: rgb(248, 244, 244);left: 27%; ">
+            <div class="posteos">   
+              
+                {% for p in post %}
+                <div class="container" style="padding-right: 40%">
+                  <div class="card mb-3" style="max-width: 85%; ">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{{img}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body" style="color:black; text-align: left;">
+                            <h5 class="card-title">{{ username }}</h5>
+                            <p class="card-text">
+                              <ul style="list-style: none;">
+                                
+                                <h3>{{ p.titulo }}</h3>
+                                <h4>{{ p.subtitulo }}</h4>
+                                <h6>{{ p.cuerpo }}</h6>
+                                <h6>{{ p.fecha }}</h6>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
                   {% endfor %}
-                  </ul>
-                </form>
-              </div>
+                             
             </div>
-            
+          </div>            
           </div>
         </div>
       </div>

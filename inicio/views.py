@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from re import template
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -20,17 +21,31 @@ def home(request):
         avatar = avatar[0].image.url
     except:
         avatar = None
-    return render(request, "home.html", {'avatar': avatar})
+    post = Posteo.objects.all()
+    return render(request, "home.html", {"post": post, 'avatar': avatar}) 
+    
     #return render (request, "home.html")
 
 def homelg(request):
     return render (request, "homelg.html")
 
 def CvSesar(request):
-    return render (request, "CvSesar.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "CvSesar.html", {'avatar': avatar})
+    
 
 def CvPeralta(request):
-    return render (request, "CvPeralta.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "CvPeralta.html", {'avatar': avatar})
+    
 
 #def registro(request):
 #    if request.method == "POST":
@@ -68,8 +83,13 @@ def fotoPerfil(request):
     return render (request, "fotoPerfil.html")
 
 def experiencia(request):
-
-    return render (request, "experiencia.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "experiencia.html", { 'avatar': avatar})
+    
 
 #def actualizar(request):
 #    if request.method == 'POST':
@@ -93,7 +113,12 @@ def registro(request):
         else:
             return redirect(request, "registro.html", {'form': form})  
     form = UserRegisterForm()
-    return render(request, "registro.html", {'form': form})  
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "registro.html", {'form': form, 'avatar': avatar})  
 
 #def login(request):
 #    return render (request, "login.html")
@@ -130,16 +155,16 @@ def AgregarAvatar(request):
         print(form.is_valid())
         if form.is_valid():
             user = User.objects.get(id = request.user.id)
-            print(user)
             avatar = Avatar(user = user, image = form.cleaned_data['avatar'], id = request.user.id)
-            print(avatar)
             avatar.save()
             avatar = Avatar.objects.filter(user = request.user.id)
             try:
                 avatar = avatar[0].image.url
             except:
-                avatar = None           
-            return render(request, 'home.html', {'avatar': avatar})
+                avatar = None
+            usuario = request.user
+            usuario =User.objects.filter(username__icontains= usuario.id)            
+            return render(request, 'perfil.html', {'avatar': avatar, 'usuario': usuario})
     else:
         try:
             avatar = Avatar.objects.filter(user = request.user.id)
@@ -157,20 +182,33 @@ def AgregarAvatar(request):
 #    return render(request, "newpost.html")
 
 def newpost(request): 
+    user=User.objects.get(username = request.user.username)
     if request.method == 'POST':
-            post= Posteo(image = request.POST.get("img", False) , titulo= request.POST['titulo'] , subtitulo= request.POST['subtitulo'] , cuerpo= request.POST['cuerpo'] , fecha= request.POST['fecha'])
+            post= Posteo(request.POST, request.FILES)
+            #user=User.objects.get(id = request.user.id)
+            post= Posteo(user=user, image = request.FILES.get("img", False) , titulo= request.POST['titulo'] , subtitulo= request.POST['subtitulo'] , cuerpo= request.POST['cuerpo'] , fecha= request.POST['fecha'])
             post.save()
-            posteo= Posteo.objects.all()
-            return render (request, "home.html", {'posteo': posteo})
+            post= Posteo.objects.all()
+            avatar = Avatar.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None
+            return render (request, "home.html", {'post': post, 'avatar': avatar})
     else:
             "faltan datos"
-    return render (request, "newpost.html") 
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    #user= Posteo.objects.get(user = request.posteo.user)
+    return render (request, "newpost.html", {'avatar': avatar, 'username': user}) 
 #
-def verpost(request):
-    post=request.post
-    post = Posteo.objects.get()
-    return render(request, "home.html", {"post": post})   
-    #return HttpResponse( {"post": post})
+#def verpost(request):
+#    post = Posteo.objects.get(post= request.all)
+#    return render(request, "home.html", {"post": post})   
+#    #return HttpResponse( {"post": post})
 
 #def Agregarimagen(request):
 #    if request.method == 'POST':
@@ -211,14 +249,18 @@ def actualizar(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render(request, 'home.html', {'avatar': avatar})
+            usuario = request.user
+            usuario =User.objects.filter(username__icontains= usuario.username) 
+            return render(request, 'perfil.html', {'avatar': avatar, 'usuario': usuario})
         else:
             avatar = Avatar.objects.filter(user = request.user.id)
             try:
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render(request, 'home.html', {'form':formulario, 'avatar': avatar})
+            usuario = request.user
+            usuario =User.objects.filter(username__icontains= usuario.username)                      
+            return render(request, 'perfil.html', {'form':formulario, 'avatar': avatar, 'usuario': usuario})
     else:
         formulario = UserEditForm(initial={'email': usuario.email, 'username': usuario.username, 'first_name': usuario.first_name, 'last_name': usuario.last_name })
     return render(request, 'actualizar.html', {'formulario': formulario, 'usuario': usuario})
@@ -241,9 +283,12 @@ def cambiarContraseña(request):
     return render(request, 'cambiarContraseña.html', {'form': form, 'usuario': usuario})
 
 def delete(request):
-    usuario = request.user
-    usuario =User.objects.get(username__icontains= usuario.username) 
-    usuario.delete()
+    usuario = 1
+    if  usuario == 1:
+        usuario = request.user
+        usuario =User.objects.get(username__icontains= usuario.username) 
+        usuario.delete()
+        return render(request, "homelg.html")
     usuario = request.user
     usuario =User.objects.filter(username__icontains= usuario.username) 
     respuesta= {"usuario": usuario}

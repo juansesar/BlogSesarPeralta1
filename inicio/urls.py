@@ -13,7 +13,7 @@ urlpatterns = [
     path('perfil/',perfil),
     path('actualizar/', actualizar),
     path('avatar/', AgregarAvatar),
-    path('verpost/', verpost),
+    #path('verpost/', verpost),
     path('delete/', delete),
     path('home/', home),
     path('login/', login_request),
@@ -24,6 +24,6 @@ urlpatterns = [
     path('newpost/', newpost),
     path('logout/', LogoutView.as_view(template_name = 'homelg.html'), name="Logout" ),
     path('home/<name>', home),
-    path('verpost', verpost),
+    #path('verpost', verpost),
     path('cambiarContraseña', cambiarContraseña),
 ]
