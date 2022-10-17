@@ -22,6 +22,7 @@ def home(request):
     except:
         avatar = None
     post = Posteo.objects.all()
+    
     return render(request, "home.html", {"post": post, 'avatar': avatar}) 
     
     #return render (request, "home.html")
@@ -139,7 +140,8 @@ def login_request(request):
                     avatar = avatar[0].image.url
                 except:
                     avatar = None
-                return render(request, 'home.html', {'avatar': avatar})
+                post= Posteo.objects.all()    
+                return render(request, 'home.html', {'avatar': avatar, 'post': post})
             else:
                 return render(request, "login.html", {'formulario':formulario})
         else:
@@ -202,7 +204,7 @@ def newpost(request):
         avatar = avatar[0].image.url
     except:
         avatar = None
-    #user= Posteo.objects.get(user = request.posteo.user)
+    user= user
     return render (request, "newpost.html", {'avatar': avatar, 'username': user}) 
 #
 #def verpost(request):
