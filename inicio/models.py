@@ -25,7 +25,7 @@ class imagenes(models.Model):
     image = models.ImageField(upload_to='imagenes', null = True, blank = True)
 
 class Posteo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=50)
     subtitulo = models.CharField(max_length=100)
     cuerpo = models.CharField(max_length=500)

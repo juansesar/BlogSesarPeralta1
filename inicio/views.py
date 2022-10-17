@@ -15,7 +15,13 @@ from django.contrib.auth.models import User
 import pprint
 # Create your views here.
 def home(request):
-    return render (request, "home.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "home.html", {'avatar': avatar})
+    #return render (request, "home.html")
 
 def homelg(request):
     return render (request, "homelg.html")
@@ -123,7 +129,7 @@ def AgregarAvatar(request):
         print(form)
         print(form.is_valid())
         if form.is_valid():
-            user = User.objects.get(id = request.user)
+            user = User.objects.get(id = request.user.id)
             print(user)
             avatar = Avatar(user = user, image = form.cleaned_data['avatar'], id = request.user.id)
             print(avatar)
@@ -162,7 +168,7 @@ def newpost(request):
 #
 def verpost(request):
     post=request.post
-    post = Posteo.objects.all(titulo__icontains= post.titulo)
+    post = Posteo.objects.get()
     return render(request, "home.html", {"post": post})   
     #return HttpResponse( {"post": post})
 
