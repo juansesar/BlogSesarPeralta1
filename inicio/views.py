@@ -40,15 +40,23 @@ def perfil(request):
     usuario = request.user
     usuario =User.objects.filter(username__icontains= usuario.username) 
     respuesta= {"usuario": usuario}
-    return render(request, "perfil.html", {"usuario": usuario})
-
-def perfilView(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
         avatar = avatar[0].image.url
     except:
         avatar = None
-    return render(request, 'perfil.html', {'avatar': avatar})
+    return render(request, "perfil.html", {"usuario": usuario, 'avatar': avatar})
+
+#def perfil(request):
+#    usuario = request.user
+#    usuario =User.objects.filter(username__icontains= usuario.username) 
+#    respuesta= {"usuario": usuario}
+#    avatar = Avatar.objects.filter(user = request.user.id)
+#    try:
+#        avatar = avatar[0].image.url
+#    except:
+#        avatar = None
+#    return render(request, 'perfil.html', {'avatar': avatar}, {"usuario": usuario})
 
 def fotoPerfil(request):
     return render (request, "fotoPerfil.html")
@@ -115,8 +123,10 @@ def AgregarAvatar(request):
         print(form)
         print(form.is_valid())
         if form.is_valid():
-            user = User.objects.get(id = request.user.id)
+            user = User.objects.get(id = request.user)
+            print(user)
             avatar = Avatar(user = user, image = form.cleaned_data['avatar'], id = request.user.id)
+            print(avatar)
             avatar.save()
             avatar = Avatar.objects.filter(user = request.user.id)
             try:
@@ -156,28 +166,28 @@ def verpost(request):
     return render(request, "home.html", {"post": post})   
     #return HttpResponse( {"post": post})
 
-def Agregarimagen(request):
-    if request.method == 'POST':
-        form = ImagenFormulario(request.POST, request.FILES)
-        print(form)
-        print(form.is_valid())
-        if form.is_valid():
-            imagen = imagenes( imagen = form.cleaned_data['imagen'], id = request.user.id)
-            imagen.save()
-            imagen = imagenes.objects.filter(user = request.user.id)
-            try:
-                imagen = imagen[0].image.url
-            except:
-                imagen = None           
-            return render(request, 'home.html', {'imagen': imagen})
-    else:
-        try:
-            avatar = imagenes.objects.filter(user = request.user.id)
-            form = ImagenFormulario()
-        except:
-            form = ImagenFormulario()
-    return render(request, 'AgregarAvatar.html', {'form': form})
-
+#def Agregarimagen(request):
+#    if request.method == 'POST':
+#        form = ImagenFormulario(request.POST, request.FILES)
+#        print(form)
+#        print(form.is_valid())
+#        if form.is_valid():
+#            imagen = imagenes( imagen = form.cleaned_data['imagen'], id = request.user.id)
+#            imagen.save()
+#            imagen = imagenes.objects.filter(user = request.user.id)
+#            try:
+#                imagen = imagen[0].image.url
+#            except:
+#                imagen = None           
+#            return render(request, 'home.html', {'imagen': imagen})
+#    else:
+#        try:
+#            avatar = imagenes.objects.filter(user = request.user.id)
+#            form = ImagenFormulario()
+#        except:
+#            form = ImagenFormulario()
+#    return render(request, 'AgregarAvatar.html', {'form': form})
+#
 def actualizar(request):
     usuario = request.user
     user_basic_info = User.objects.get(id = usuario.id)
@@ -223,3 +233,17 @@ def cambiarContraseña(request):
     else:
         form = ChangePasswordForm(user = request.user)
     return render(request, 'cambiarContraseña.html', {'form': form, 'usuario': usuario})
+
+def delete(request):
+    usuario = request.user
+    usuario =User.objects.get(username__icontains= usuario.username) 
+    usuario.delete()
+    usuario = request.user
+    usuario =User.objects.filter(username__icontains= usuario.username) 
+    respuesta= {"usuario": usuario}
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "perfil.html", {"usuario": usuario, 'avatar': avatar})

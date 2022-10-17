@@ -1,0 +1,22 @@
+{% extends "homelg.html" %}
+
+{% load static %}
+
+
+{% block contenido %}
+<link rel="stylesheet" href="{%static 'css/cosa.css'%}">
+<div class="background">
+    <img src="{%static 'imagenes/Blog (1).jpg'%}" alt="" width= "100%">
+</div>
+<div class="container" >
+    <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 12%;">
+        <div class="container" >
+            <div class="texto" style="margin-bottom: 40px;">
+                <h1>Esta seguro que desea eliminar su perfil?</h1>
+                <a class="btn btn-success" style="text-decoration: none; color: white" href="/inicio/delete">Si</a></p>
+                <a class="btn btn-success" style="text-decoration: none; color: white" href="/inicio/perfil">No</a></p>
+            </div>
+        </div>
+</div>
+</div>
+{% endblock %}

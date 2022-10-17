@@ -66,7 +66,7 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
           
             <div class="caption" style="top: 110%; position: absolute; height: auto; margin: auto; text-align: center;color: rgb(248, 244, 244);left: 27%; ">
               <div class="posteos">
-                
+                <form action="" method="GET" enctype="multipart/form-data"> 
                   <ul>
                   {% for p in post %}
                   <li>{{ p.img }}</li>
@@ -76,7 +76,7 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                   <li>{{ p.fecha }}</li>
                   {% endfor %}
                   </ul>
-                
+                </form>
               </div>
             </div>
             
