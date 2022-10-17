@@ -26,4 +26,5 @@ urlpatterns = [
     path('home/<name>', home),
     #path('verpost', verpost),
     path('cambiarContraseña', cambiarContraseña),
+    path('deletePost/', deletePost),
 ]

@@ -299,3 +299,17 @@ def delete(request):
     except:
         avatar = None
     return render(request, "perfil.html", {"usuario": usuario, 'avatar': avatar})
+
+def deletePost(request):
+    post = 1
+    if  post == 1:
+        post= request.posteo
+        post =Posteo.objects.filter(user_id__icontains= post.id) 
+        post.delete()
+        return render(request, "home.html")
+    post=Posteo.objects.all()
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "home.html", {"post": post, 'avatar': avatar})
