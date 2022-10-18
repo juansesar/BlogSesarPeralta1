@@ -43,3 +43,13 @@ class AvatarFormulario(forms.Form):
 
 class ImagenFormulario(forms.Form):
     imagen = forms.ImageField()
+
+class PostEditForm(UserChangeForm):
+    titulo = forms.CharField(widget= forms.TextInput(attrs={'placeholder': 'titulo'}))
+    subtitulo = forms.CharField(widget= forms.TextInput(attrs={'placeholder': 'subtitulo'}))
+    cuerpo = forms.CharField(widget= forms.TextInput(attrs={'placeholder': 'cuerpo'}))
+    fecha = forms.DateField(widget= forms.TextInput(attrs={'placeholder': 'fecha'}))
+    image = forms.ImageField(widget= forms.FileInput(attrs={'placeholder': 'foto'}))
+    
+    
+    

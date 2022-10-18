@@ -72,11 +72,11 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                   <div class="card mb-3" style="max-width: 85%; ">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="{{p.image}}" class="img-fluid rounded-start" alt="...">
+                          <img src={{p.image}} class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body" style="color:black; text-align: left;">
-                            <h5 class="card-title">post</h5>
+                            <h5 class="card-title">{{avatarp}} {{username}}</h5>
                             <p class="card-text">
                               <ul style="list-style: none;">
                                 
@@ -84,7 +84,10 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                                 <h4>{{ p.subtitulo }}</h4>
                                 <h6>{{ p.cuerpo }}</h6>
                                 <h6>{{ p.fecha }}</h6>
-                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost">eliminar user</a></p>
+                              </ul>  
+                                                          
+                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost">eliminar post</a></p>
+                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost">actualizar post</a></p>
                               </div>
                             </div>
                           </div>

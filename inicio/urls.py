@@ -3,6 +3,8 @@ from inicio.views import *
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 from django import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     
@@ -27,4 +29,6 @@ urlpatterns = [
     #path('verpost', verpost),
     path('cambiarContraseña', cambiarContraseña),
     path('deletePost/', deletePost),
+    path('actualizarpost/', actualizarpost),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

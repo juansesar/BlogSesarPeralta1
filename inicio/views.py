@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from re import template
+import re
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -151,6 +152,8 @@ def login_request(request):
 
 #@login_required
 def AgregarAvatar(request):
+    usuario = request.user
+    usuario =User.objects.filter(username__icontains= usuario.username)
     if request.method == 'POST':
         form = AvatarFormulario(request.POST, request.FILES)
         print(form)
@@ -164,14 +167,15 @@ def AgregarAvatar(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None           
-            return render(request, 'perfil.html', {'avatar': avatar})
+            return render(request, 'perfil.html', {'avatar': avatar, 'usuario': usuario})
     else:
         try:
             avatar = Avatar.objects.filter(user = request.user.id)
             form = AvatarFormulario()
         except:
             form = AvatarFormulario()
-    return render(request, 'avatar.html', {'form': form})           
+    
+    return render(request, 'avatar.html', {'form': form })           
     
 #def newpost(request):
 #    if request.method == 'POST':
@@ -182,7 +186,8 @@ def AgregarAvatar(request):
 #    return render(request, "newpost.html")
 
 def newpost(request): 
-    user=User.objects.get(username = request.user.username)
+    user = request.user
+    user=User.objects.get(id = request.user.id)
     if request.method == 'POST':
             post= Posteo(request.POST, request.FILES)
             #user=User.objects.get(id = request.user.id)
@@ -194,7 +199,20 @@ def newpost(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            
+            #id= Posteo.objects.filter(user= request.posteo.user_id)
+            #id= User.objects.filter(id__icontains= id.user.id)
+            #avatarp = Avatar.objects.filter(user_id__icontains= id.user.id )
+            #try: 
+            #
+            #    username=User.objects.filter(id__icontains= username.user.username)
+            #    avatar = avatar[0].image.url
+            #    
+            #    try:
+            #        avatarp = avatar[0].image.url
+            #    except:
+            #        avatarp = None
+            #except:
+            #    username= None    
             return render (request, "home.html", {'post': post, 'avatar': avatar})
     else:
             "faltan datos"
@@ -301,15 +319,57 @@ def delete(request):
     return render(request, "perfil.html", {"usuario": usuario, 'avatar': avatar})
 
 def deletePost(request):
-    post = 1
-    if  post == 1:
-        post= request.posteo
-        post =Posteo.objects.filter(user_id__icontains= post.id) 
-        post.delete()
-        return render(request, "home.html")
+    #username= request.user
+    #post= Posteo.objects.get(user_id= username.id)
+    
+    post.delete()
     post=Posteo.objects.all()
+    avatar = Avatar.objects.filter(user = request.user.id)
     try:
         avatar = avatar[0].image.url
     except:
         avatar = None
-    return render(request, "home.html", {"post": post, 'avatar': avatar})
+    return render(request, "home.html",  {"post": post, 'avatar': avatar})
+    
+    
+        #post=Posteo.objects.all()
+        #avatar = Avatar.objects.filter(user = request.user.id)
+        #try:
+        #    avatar = avatar[0].image.url
+        #except:
+        #    avatar = None
+        #return render (request, "home.html",  {"post": post, 'avatar': avatar})
+
+def actualizarpost(request):
+    post=Posteo.id
+    formulario = PostEditForm(request.POST, instance = post)
+    if formulario.is_valid():
+        #Datos que se van a actualizar
+        Posteo.titulo = formulario.cleaned_data.get('titulo')
+        Posteo.subtitulo = formulario.cleaned_data.get('subtitulo')
+        Posteo.fecha = formulario.cleaned_data.get('fecha')
+        Posteo.image = formulario.cleaned_data.get('foto')
+        Posteo.save()
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+            avatar = None
+        post=Posteo.objects.all()
+        return render(request, 'home.html', {'avatar': avatar, 'post': post})
+    else:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+            avatar = None
+        post=Posteo.objects.all()
+        formulario= PostEditForm()
+        return render(request, 'actualizarpost-html', {'avatar': avatar, 'post': post, 'formulario': formulario})
+        
+    formulario = UserEditForm()
+    post=Posteo.objects.all()
+    return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})
+    formulio = UserEditForm()
+    post=Posteo.objects.all()
+    return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})

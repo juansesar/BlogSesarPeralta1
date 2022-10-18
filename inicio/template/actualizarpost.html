@@ -1,0 +1,23 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<div class="bg-image" 
+     style="background-image: url('/static/imagenes/Blog (1).jpg');
+            height: 100vh">
+</div>
+    <div class="caption" style="top: 15%; position: absolute; height: auto; margin: auto; text-align: left;color: rgb(247, 242, 242);left: 27%; ">
+        <h1>Actualizar post</h1>
+        <form action="" method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
+        <table>
+            {{ formulario.as_table }}
+        </table>
+        <input type="submit" value="Editar Perfil">
+        </form>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
