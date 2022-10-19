@@ -28,7 +28,7 @@ urlpatterns = [
     path('home/<name>', home),
     #path('verpost', verpost),
     path('cambiarContraseña', cambiarContraseña),
-    path('deletePost/', deletePost),
-    path('actualizarpost/', actualizarpost),
+    path('deletePost/<p_id>', deletePost),
+    path('actualizarpost/<p_id>', actualizarpost),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

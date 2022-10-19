@@ -30,6 +30,6 @@ class Posteo(models.Model):
     cuerpo = models.CharField(max_length=500)
     fecha = models.DateField()
     image = models.ImageField(upload_to='imagenes', null = True, blank = True,)
-
+    
 class imagenes(models.Model):
     image = models.ImageField(upload_to='imagenes', null = True, blank = True)

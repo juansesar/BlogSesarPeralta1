@@ -76,7 +76,7 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                         </div>
                         <div class="col-md-8">
                           <div class="card-body" style="color:black; text-align: left;">
-                            <h5 class="card-title">{{avatarp}} {{username}}</h5>
+                            <h5 class="card-title">-{{user}}</h5>
                             <p class="card-text">
                               <ul style="list-style: none;">
                                 
@@ -86,8 +86,8 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                                 <h6>{{ p.fecha }}</h6>
                               </ul>  
                                                           
-                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost{{p.id}}">eliminar post</a></p>
-                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost{{p.id}}">actualizar post</a></p>
+                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost/{{p.id}}">eliminar post</a></p>
+                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost/{{p.id}}">actualizar post</a></p>
                               </div>
                             </div>
                           </div>
