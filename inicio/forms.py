@@ -51,5 +51,7 @@ class PostEditForm(forms.Form):
     fecha = forms.DateField(widget= forms.TextInput(attrs={'placeholder': 'fecha'}))
     image = forms.ImageField(widget= forms.FileInput(attrs={'placeholder': 'foto'}))
     
+
     
+        
     

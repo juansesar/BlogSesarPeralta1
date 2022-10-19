@@ -340,31 +340,72 @@ def deletePost(request):
         #    avatar = None
         #return render (request, "home.html",  {"post": post, 'avatar': avatar})
 
-def actualizarpost(request):
-    formulario= PostEditForm()
-    if not formulario == None:
+#def actualizarpost(request):
+#    formulario= PostEditForm()
+#    if not formulario == None:
+#        formulario= PostEditForm(request.POST, request.FILES)
+#        #user= Posteo.objects.get(user_id= Posteo.user_id)
+#        post= Posteo( image = formulario.cleaned_data.get("img", False) , titulo= formulario.cleaned_data.get['titulo'] , subtitulo= formulario.cleaned_data.get['subtitulo'] , cuerpo=formulario.cleaned_data.get['cuerpo'] , fecha= formulario.cleaned_data.get['fecha'])
+#        post.save()
+#        #posteo.titulo = formulario.cleaned_data.get('titulo')
+#        #posteo.subtitulo = formulario.cleaned_data.get('subtitulo')
+#        #posteo.fecha = formulario.cleaned_data.get('fecha')
+#        #posteo.image = formulario.cleaned_data.get('foto')
+#        #posteo.save()
+#        avatar = Avatar.objects.filter(user = request.user.id)
+#        try:
+#            avatar = avatar[0].image.url
+#        except:
+#            avatar = None
+#        post=Posteo.objects.all()
+#        return render(request, 'home.html', {'avatar': avatar, 'post': post})
+#    post=Posteo.objects.all()
+#    formulario= PostEditForm()
+#    return render(request, 'actualizarpost.html', {'avatar': avatar, 'post': post, 'formulario': formulario})    
+#    #formulario = UserEditForm()
+    #post=Posteo.objects.all()
+    #return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})
+    #formulio = UserEditForm()
+    #post=Posteo.objects.all()
+    #return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})
+
+#class PosteoUpdate(UpdateView):
+#    model = Posteo
+#    success_url = "/inicio/actualizarpost"
+#    fields = ["titulo", "subtitulo", "cuerpo", "fecha", "image"]
+
+def actualizarpost(request,):
+    
+    
+    if request.method == 'POST':
         formulario= PostEditForm(request.POST, request.FILES)
-        #user= Posteo.objects.get(user_id= Posteo.user_id)
-        post= Posteo( image = formulario.cleaned_data.get("img", False) , titulo= formulario.cleaned_data.get['titulo'] , subtitulo= formulario.cleaned_data.get['subtitulo'] , cuerpo=formulario.cleaned_data.get['cuerpo'] , fecha= formulario.cleaned_data.get['fecha'])
-        post.save()
-        #posteo.titulo = formulario.cleaned_data.get('titulo')
-        #posteo.subtitulo = formulario.cleaned_data.get('subtitulo')
-        #posteo.fecha = formulario.cleaned_data.get('fecha')
-        #posteo.image = formulario.cleaned_data.get('foto')
-        #posteo.save()
+        print(PostEditForm)
+        if formulario.is_valid():
+            informacion= formulario.cleaned_data
+            Posteo.titulo=informacion['titulo']
+            Posteo.subtitulo=informacion['subtitulo']
+            Posteo.cuerpo=informacion['cuerpo']
+            Posteo.fecha=informacion['fecha']
+            Posteo.image=informacion['image']
+            Posteo.save()
+            avatar = Avatar.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None
+            post=Posteo.objects.all()
+            return render(request, 'home.html', {'avatar': avatar, 'post': post})
+
+        else:
+            formulario = PostEditForm({'titulo': posteo.titulo, 'subtitulo': posteo.subtitulo, 'cuerpo': posteo.cuerpo, 'fecha': posteo.fecha, 'image': posteo.image})
         avatar = Avatar.objects.filter(user = request.user.id)
         try:
             avatar = avatar[0].image.url
         except:
             avatar = None
         post=Posteo.objects.all()
-        return render(request, 'home.html', {'avatar': avatar, 'post': post})
-    post=Posteo.objects.all()
-    formulario= PostEditForm()
-    return render(request, 'actualizarpost.html', {'avatar': avatar, 'post': post, 'formulario': formulario})    
-    #formulario = UserEditForm()
-    #post=Posteo.objects.all()
-    #return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})
-    #formulio = UserEditForm()
-    #post=Posteo.objects.all()
-    #return render(request, 'actualizarpost.html', {'formulario': formulario, 'post': post})
+        formulario= PostEditForm()
+        return render(request, 'actualizarpost.html', {'formulario': formulario, 'avatar': avatar, 'post': post})
+
+        
+    
