@@ -320,9 +320,9 @@ def delete(request):
 
 def deletePost(request):
     
+    post=Posteo.objects.get()
     
-    
-    Posteo.delete(Posteo)
+    post.delete()
     post=Posteo.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
