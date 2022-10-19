@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -33,3 +34,8 @@ class Posteo(models.Model):
     
 class imagenes(models.Model):
     image = models.ImageField(upload_to='imagenes', null = True, blank = True)
+
+class mensajes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    mensaje = models.CharField(max_length=500)
+    post_id = models.IntegerField( null = True)

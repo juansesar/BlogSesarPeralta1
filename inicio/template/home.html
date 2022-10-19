@@ -88,11 +88,21 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                                                           
                                 <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost/{{p.id}}">eliminar post</a></p>
                                 <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost/{{p.id}}">actualizar post</a></p>
-                              </div>
-                            </div>
                           </div>
+                        </div>
                       </div>
+                      <form method="POST">
+                        {% for m in mensaje %}
+                        <h1>{{m}}</h1>
+                        {% endfor %}
+                        <p>
+                            {% csrf_token %}
+                            {{ form_mensaje.as_p }}
+                            <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/mensajeria/{{p.id}}">Enviar</a></p>
+                        </p>
+                        
                   </div>
+                </div>
                   {% endfor %}
                              
             </div>

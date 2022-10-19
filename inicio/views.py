@@ -23,7 +23,8 @@ def home(request):
     except:
         avatar = None
     post = Posteo.objects.all()
-    return render(request, "home.html", {"post": post, 'avatar': avatar}) 
+    form_mensaje=mensajesForm()
+    return render(request, "home.html", {"post": post, 'avatar': avatar, 'form_mensaje': form_mensaje}) 
     
     #return render (request, "home.html")
 
@@ -277,5 +278,16 @@ def actualizarpost(request,  p_id):
     formulario= PostEditForm()
     return render(request, 'actualizarpost.html', {'formulario': formulario, 'avatar': avatar, 'post': post})
 
-        
-    
+def mensajeria(request, p_id):       
+    form_mensaje=mensajesForm()
+    if request.method == 'POST':
+        mensaje= mensajes(request.POST)
+        mensaje= mensajes( mensaje= request.POST("mensaje"),post_id= p_id)
+        mensaje.save()
+        post_id= Posteo.objects.filter(id= p_id) 
+        mensaje_id= mensajes.objects.filter( post_id = post_id)
+        if post_id == mensaje_id:
+            mensaje= mensaje.objescts.filter(mensaje__icontains= p_id)
+            return render(request, 'home.html', {'mensaje':mensaje})
+    form_mensaje=mensajesForm()
+    return render (request, 'home.html', {'form_mensaje': form_mensaje})
