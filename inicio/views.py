@@ -22,9 +22,10 @@ def home(request):
         avatar = avatar[0].image.url
     except:
         avatar = None
-    post = Posteo.objects.all()
+    post=Posteo.objects.all()
     form_mensaje=mensajesForm()
-    return render(request, "home.html", {"post": post, 'avatar': avatar, 'form_mensaje': form_mensaje}) 
+    mensaje= Mensajes.objects.all()
+    return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
     
     #return render (request, "home.html")
 
@@ -102,13 +103,17 @@ def login_request(request):
                     avatar = avatar[0].image.url
                 except:
                     avatar = None
-                post= Posteo.objects.all()    
-                return render(request, 'home.html', {'avatar': avatar, 'post': post})
+                post=Posteo.objects.all()
+                form_mensaje=mensajesForm()
+                mensaje= Mensajes.objects.all()
+                return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
+                
             else:
                 return render(request, "login.html", {'formulario':formulario})
         else:
             return render(request, "login.html", {'formulario':formulario})
     formulario = AuthenticationForm()
+
     return render(request, 'login.html', {'formulario': formulario})
 
 #@login_required
@@ -153,7 +158,10 @@ def newpost(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render (request, "home.html", {'post': post, 'avatar': avatar})
+            post=Posteo.objects.all()
+            form_mensaje=mensajesForm()
+            mensaje= Mensajes.objects.all()
+            return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
     else:
             "faltan datos"
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -209,7 +217,10 @@ def cambiarContraseña(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render(request, 'home.html', {'avatar': avatar})
+            post=Posteo.objects.all()
+            formulario= PostEditForm()
+            mensaje= Mensajes.objects.all()
+            return render(request, 'home.html', {'mensaje':mensaje, 'formulario': formulario, 'avatar': avatar, 'post': post})
     else:
         form = ChangePasswordForm(user = request.user)
     return render(request, 'cambiarContraseña.html', {'form': form, 'usuario': usuario})
@@ -242,7 +253,10 @@ def deletePost(request, p_id):
         avatar = avatar[0].image.url
     except:
         avatar = None
-    return render(request, "home.html",  {"post": post, 'avatar': avatar})
+    post=Posteo.objects.all()
+    form_mensaje=mensajesForm()
+    mensaje= Mensajes.objects.all()
+    return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
     
     
 def actualizarpost(request,  p_id):
@@ -265,7 +279,9 @@ def actualizarpost(request,  p_id):
             except:
                 avatar = None
             post=Posteo.objects.all()
-            return render(request, 'home.html', {'avatar': avatar, 'post': post})
+            form_mensaje=mensajesForm()
+            mensaje= Mensajes.objects.all()
+            return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
 
     else:
         formulario = PostEditForm({'titulo': posteo.titulo, 'subtitulo': posteo.subtitulo, 'cuerpo': posteo.cuerpo, 'fecha': posteo.fecha, 'image': posteo.image})
@@ -279,15 +295,31 @@ def actualizarpost(request,  p_id):
     return render(request, 'actualizarpost.html', {'formulario': formulario, 'avatar': avatar, 'post': post})
 
 def mensajeria(request, p_id):       
-    form_mensaje=mensajesForm()
+    user= request.user
+    #form_mensaje=mensajesForm(request.POST)
     if request.method == 'POST':
-        mensaje= mensajes(request.POST)
-        mensaje= mensajes( mensaje= request.POST("mensaje"),post_id= p_id)
-        mensaje.save()
-        post_id= Posteo.objects.filter(id= p_id) 
-        mensaje_id= mensajes.objects.filter( post_id = post_id)
-        if post_id == mensaje_id:
-            mensaje= mensaje.objescts.filter(mensaje__icontains= p_id)
-            return render(request, 'home.html', {'mensaje':mensaje})
+        #form_mensaje=mensajesForm(request.POST)
+        mensaje= Mensajes(request.POST)
+        mensajes= Mensajes(user=user,mensaje= request.POST["mensaje"],post_id= p_id)
+        mensajes.save()
+        
+        
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+            avatar = None
+        post=Posteo.objects.all()
+        form_mensaje=mensajesForm()
+        mensaje= Mensajes.objects.all()
+        return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
+    
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    post=Posteo.objects.all()
     form_mensaje=mensajesForm()
-    return render (request, 'home.html', {'form_mensaje': form_mensaje})
+    mensaje= Mensajes.objects.all()
+    return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})

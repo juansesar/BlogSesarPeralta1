@@ -5,3 +5,4 @@ from inicio.models import *
 admin.site.register(Avatar),
 admin.site.register(imagenes),
 admin.site.register(Posteo),
+admin.site.register(Mensajes),

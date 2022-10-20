@@ -30,6 +30,6 @@ urlpatterns = [
     path('cambiarContraseña', cambiarContraseña),
     path('deletePost/<p_id>', deletePost),
     path('actualizarpost/<p_id>', actualizarpost),
-    path('mensaje/<p_id>', mensajeria),
+    path('mensajeria/<p_id>', mensajeria),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
