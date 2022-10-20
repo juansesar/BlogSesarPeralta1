@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{%static 'css/cosa.css'%}">
+
+{% block contenido %}
+    <div class="bg-image" 
+style="background-image: url('/static/imagenes/Blog (1).jpg');
+       height: 500vh">
+</div>
+        <div class="caption" style="top: 30%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
+        <div class="container" >
+          <div class="bienvenida" ></div> 
+            <h1>Bienvendo al Blog</h1>
+            <h3>un proyecto de Sesar-Peralta</h3>
+            
+            <img src="{%static 'imagenes/Blog_2.png'%}" alt="">
+          </div>
+        </div>  
+    </div>
+{% endblock %}

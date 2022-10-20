@@ -60,8 +60,13 @@ def perfil(request):
         avatar = None
     return render(request, "perfil.html", {"usuario": usuario, 'avatar': avatar})
 
-def fotoPerfil(request):
-    return render (request, "fotoPerfil.html")
+def bienvenida(request):
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render (request, "bienvenida.html", {'avatar': avatar})
 
 def experiencia(request):
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -103,10 +108,8 @@ def login_request(request):
                     avatar = avatar[0].image.url
                 except:
                     avatar = None
-                post=Posteo.objects.all()
-                form_mensaje=mensajesForm()
-                mensaje= Mensajes.objects.all()
-                return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
+                
+                return render(request, 'bienvenida.html')
                 
             else:
                 return render(request, "login.html", {'formulario':formulario})
@@ -160,7 +163,7 @@ def newpost(request):
                 avatar = None
             post=Posteo.objects.all()
             form_mensaje=mensajesForm()
-            mensaje= Mensajes.objects.all()
+            mensaje= Mensajes.objects.all()            
             return render(request, 'home.html', {'mensaje':mensaje, 'form_mensaje': form_mensaje, 'avatar': avatar, 'post': post})
     else:
             "faltan datos"

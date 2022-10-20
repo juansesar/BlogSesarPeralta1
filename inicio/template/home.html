@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="/inicio/home">Home </a>
+              <a class="nav-link" href="/inicio/home">Posteos </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/inicio/developers">Developers</a>
@@ -56,8 +56,8 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
         <div class="caption" style="top: 15%; width: 60%; position: absolute; height: auto; margin: auto; display: block; text-align: center; align-items: center; right: 15%;">
         <div class="container" >
           <div class="bienvenida" ></div> 
-            <h1>Bienvendo al Blog</h1>
-            <h3>un proyecto de Sesar-Peralta</h3>
+            <h1>Posteos de nuestros usuarios</h1>
+            
             <h5>aqui podras subir tus imagenes con un breve comentario y comunicarte con el resto de los usuarios</h5>
           </div>
           <div>
@@ -76,7 +76,7 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                         </div>
                         <div class="col-md-8">
                           <div class="card-body" style="color:black; text-align: left;">
-                            <h5 class="card-title">-{{user}}</h5>
+                            <h5 class="card-title">{{p.user}}</h5>
                             <p class="card-text">
                               <ul style="list-style: none;">
                                 
@@ -87,24 +87,26 @@ style="background-image: url('/static/imagenes/Blog (1).jpg');
                               </ul>  
                                 {% if user.id == p.user_id %}                         
                                 <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/deletePost/{{p.id}}">eliminar post</a></p>
-                                <a class="btn btn-danger" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost/{{p.id}}">actualizar post</a></p>
+                                <a class="btn btn-dark" style="text-decoration: none; color: rgb(253, 252, 252)" href="/inicio/actualizarpost/{{p.id}}">actualizar post</a></p>
                                 {% endif %}
                               </div>
                         </div>
                       </div>
-                      
+                      <div style="color:black; text-align: left;">
+                        Mensajes:
                         {% for m in mensaje %}
                         {% if m.post_id == p.id %}
-                        <h6 style="text-decoration: none; color: rgb(10, 10, 10)">{{m.mensaje}}</h6>
+                        <h6 style="text-decoration: none; color: rgb(10, 10, 10)">{{m.user}}:- {{m.mensaje}}</h6>
                         {% endif %}
                         {% endfor %}
-                        <form action="/inicio/mensajeria/{{p.id}}" method="POST" > 
+                        <form action="/inicio/mensajeria/{{p.id}}" style="align-items: center"  method="POST" > 
                         <p >
                             {% csrf_token %}
                             {{ form_mensaje.as_p }}
-                            <input class="btn btn-danger" type="submit" value="enviar">
+                            <input class="btn btn-dark" type="submit"  value="enviar">
                         </p>
                         </form>
+                      </div>
                   </div>
                 </div>
                   {% endfor %}

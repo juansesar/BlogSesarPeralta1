@@ -52,7 +52,7 @@ class PostEditForm(forms.Form):
     image = forms.ImageField(widget= forms.FileInput(attrs={'placeholder': 'foto'}))
     
 class mensajesForm(forms.Form):
-    mensaje=forms.CharField(label="deja un mensáje para este post")
+    mensaje=forms.CharField(label="deja tu mensáje")
     
         
     
